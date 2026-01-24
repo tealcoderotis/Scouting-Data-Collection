@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Selectable))]
-public class UILinkTarget : MonoBehaviour
+public class DependentUI : MonoBehaviour
 {
     private Selectable selectable;
     [SerializeField] private List<LinkState> UILinks = new();
@@ -20,19 +20,19 @@ public class UILinkTarget : MonoBehaviour
     }
 
     public LinkState GetLinkState(int index) => index >= 0 && index < UILinks.Count ? UILinks[index] : null;
-    public void AddLinks(UILink[] links)
+    public void AddLinks(DependeeUI[] links)
     {
         for (int i = 0; i < links.Length; i++)
             AddLink(links[i], false);
         UpdateInteractable();
     }
-    public void AddLink(UILink link, bool doInteractableUpdate = true)
+    public void AddLink(DependeeUI link, bool doInteractableUpdate = true)
     {
         UILinks.Add(new(link));
         UILinks[^1].updateInteractables += UpdateInteractable;
         if (doInteractableUpdate) UpdateInteractable();
     }
-    public void RemoveLink(UILink link, bool alsoDestroyObject = false)
+    public void RemoveLink(DependeeUI link, bool alsoDestroyObject = false)
     {
         LinkState linkState = null;
         for (int i = 0; i < UILinks.Count; i++)
@@ -67,7 +67,7 @@ public class UILinkTarget : MonoBehaviour
     [System.Serializable]
     public class LinkState
     {
-        public UILink link;
+        public DependeeUI link;
         public bool state;
         public bool trueIfInactive;
         public bool? @override = null;
@@ -82,13 +82,13 @@ public class UILinkTarget : MonoBehaviour
         }
         public System.Action updateInteractables = delegate { };
 
-        public LinkState(UILink link)
+        public LinkState(DependeeUI link)
         {
             if (!Application.isPlaying) return;
             Setup(link);
         }
         // constructors dont run when the thing first gets loaded
-        public void Setup(UILink link)
+        public void Setup(DependeeUI link)
         {
             this.link = link;
             link.onEventCall += SetState;

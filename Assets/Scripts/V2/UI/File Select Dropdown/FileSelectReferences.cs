@@ -34,7 +34,7 @@ public class FileSelectReferences : MonoBehaviour
     private void OnEnable()
     {
         if (file != null) UpdateDisplay();
-        select.isOn = GetName() == AppSettingsSaveManager.Instance.CurrentAppSettings.presetName;
+        select.isOn = GetName() == AppSettingsSaveManager.CurrentAppSettings.presetName;
         LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
     }
 }

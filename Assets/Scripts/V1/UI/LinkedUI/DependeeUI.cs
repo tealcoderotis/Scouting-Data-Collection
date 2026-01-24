@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // In order to allow lists that include every type of link
-public abstract class UILink : MonoBehaviour
+public abstract class DependeeUI : MonoBehaviour
 {
     public System.Action<bool> onEventCall = delegate { };
     public abstract void ForceUpdate();
 }
 // general class that needs to be set up, but allows use without requiring a UI element
-public abstract class UILink<ConditionType> : UILink
+public abstract class DependeeUI<ConditionType> : DependeeUI
 {
     protected abstract ConditionType GetCurrentValue { get; }
     protected abstract bool GetEnabled(ConditionType input);
@@ -19,7 +19,7 @@ public abstract class UILink<ConditionType> : UILink
     public override void ForceUpdate() => Listener(GetCurrentValue);
 }
 // automatically sets everything up, but requires UI element, 
-public abstract class UILink<UnityEventSource, ConditionType> : UILink<ConditionType> where UnityEventSource : Selectable
+public abstract class DependeeUI<UnityEventSource, ConditionType> : DependeeUI<ConditionType> where UnityEventSource : Selectable
 {
     protected UnityEventSource EventSource { get; private set; }
     protected abstract UnityEngine.Events.UnityEvent<ConditionType> UnityEvent { get; }

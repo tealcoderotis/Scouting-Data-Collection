@@ -26,7 +26,7 @@ public class PresetManager : MonoBehaviour
     {
         for (int i = 0; i < presetFiles.Count; ++i)
         {
-            if (AppSettingsSaveManager.Instance.CurrentAppSettings.presetName != presetFiles[i].Name) continue;
+            if (AppSettingsSaveManager.CurrentAppSettings.presetName != presetFiles[i].Name) continue;
             LoadPreset(presetFiles[i].Name);
             return;
         }
@@ -44,7 +44,10 @@ public class PresetManager : MonoBehaviour
     }
 
 
-    public void LoadLastPreset() => LoadPreset(presetFiles[^1].Name);
+    public void LoadLastPreset()
+    {
+        if (presetFiles.Count > 0) LoadPreset(presetFiles[^1].Name);
+    }
     public void LoadPreset(int presetIndex)
     {
         if (presetIndex < 0 || presetIndex >= presetFiles.Count) LoadPreset(new SaveManager.PresetData[] { });
@@ -79,7 +82,7 @@ public class PresetManager : MonoBehaviour
         }
         SaveManager.SaveScoutingPreset(scouterNamePreset.text, scouterObjects);
         presetFiles.Insert(0, new FileInfo(Path.Combine(SaveManager.ScoutingPresets, scouterNamePreset.text)));
-        AppSettingsSaveManager.Instance.CurrentAppSettings.presetName = scouterNamePreset.text;
+        AppSettingsSaveManager.CurrentAppSettings.presetName = scouterNamePreset.text;
     }
 
     public void EnabledIsDuplicate(GameObject gameObj) => gameObj.SetActive(SaveManager.PresetExists(scouterNamePreset.text));

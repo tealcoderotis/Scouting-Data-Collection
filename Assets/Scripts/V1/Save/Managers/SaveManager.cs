@@ -15,14 +15,14 @@ public class SaveManager
 
     public static bool ValidateDirectory(string directoryPath)
     {
-        bool exists = Directory.Exists(directoryPath);
-        if (!exists) Directory.CreateDirectory(directoryPath);
-        return exists;
+        bool existed = Directory.Exists(directoryPath);
+        if (!existed) Directory.CreateDirectory(directoryPath);
+        return existed;
     }
 
     public static void SaveAppSettings()
     {
-        File.WriteAllText(AppSettingsPath, JsonUtility.ToJson(AppSettingsSaveManager.Instance.CurrentAppSettings));
+        File.WriteAllText(AppSettingsPath, JsonUtility.ToJson(AppSettingsSaveManager.CurrentAppSettings));
     }
     public static AppSettings GetAppSettings()
     {
@@ -33,7 +33,17 @@ public class SaveManager
     public static void SaveUserSettings()
     {
         ValidateDirectory(UserSettingsPath);
-        File.WriteAllText(Path.Combine(UserSettingsPath, $"TODO: GET CURRENT USER_settings.txt"), "TODO: CURRENT_USER_SETTINGS_DATA");
+        if (AppSettingsSaveManager.CurrentAppSettings.currentUser == null || AppSettingsSaveManager.CurrentAppSettings.currentUser.Length == 0)
+        {
+            AppSettingsSaveManager.CurrentAppSettings.currentUser = "NO_USER";
+        }
+        File.WriteAllText(Path.Combine(UserSettingsPath, AppSettingsSaveManager.CurrentAppSettings.currentUser), JsonUtility.ToJson(UserSettingsSaveManager.CurrentUserSettings));
+    }
+    public static UserSettings GetUserSettings()
+    {
+        string path = Path.Combine(UserSettingsPath, AppSettingsSaveManager.CurrentAppSettings.currentUser);
+        if (File.Exists(path)) return JsonUtility.FromJson<UserSettings>(File.ReadAllText(path));
+        else return new();
     }
 
     [System.Serializable]

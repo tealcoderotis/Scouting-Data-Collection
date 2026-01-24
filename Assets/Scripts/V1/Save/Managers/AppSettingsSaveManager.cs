@@ -2,16 +2,24 @@ using UnityEngine;
 
 public class AppSettingsSaveManager : MonoBehaviour
 {
-    public static AppSettingsSaveManager Instance { get; private set; }
-    private void Awake()
-    {
-        Instance = this;
-        CurrentAppSettings = SaveManager.GetAppSettings();
-    }
     private void OnApplicationPause()
     {
         SaveManager.SaveAppSettings();
     }
+    private void OnApplicationQuit()
+    {
+        SaveManager.SaveAppSettings();
+    }
+    private static AppSettings _CurrentAppSettings;
+    public static AppSettings CurrentAppSettings
+    {
+        get
+        {
+            _CurrentAppSettings ??= SaveManager.GetAppSettings();
+            _CurrentAppSettings ??= new();
+            return _CurrentAppSettings;
+        }
+    }
 
-    public AppSettings CurrentAppSettings;
+    public void SetAPIKey(string apiKey) => CurrentAppSettings.apiKey = apiKey;
 }

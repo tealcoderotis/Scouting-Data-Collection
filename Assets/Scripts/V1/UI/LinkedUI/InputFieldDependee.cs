@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InputFieldLink : UILink<TMP_InputField, string>
+public class InputFieldDependee : DependeeUI<TMP_InputField, string>
 {
     [SerializeField] private List<string> invalidInputs;
     protected override UnityEvent<string> UnityEvent => EventSource.onValueChanged;

@@ -16,15 +16,8 @@ public class OutMatchData : MonoBehaviour
 
     private void Start()
     {
-        scoutingIndex.value = AppSettingsSaveManager.Instance.CurrentAppSettings.scoutingPositionIndex;
         SetMatchNumber(ScoutingCore.EventData?.currentGlobalMatchIndex ?? 0);
         rawMatchNumber.onEndEdit.AddListener(SetMatchNumber);
-        scoutingIndex.onValueChanged.AddListener(UpdateScoutingPositionIndex);
-    }
-
-    private void UpdateScoutingPositionIndex(int index)
-    {
-        AppSettingsSaveManager.Instance.CurrentAppSettings.scoutingPositionIndex = index;
     }
 
     public void UpdateMatchSaveManagerValues(MatchData data)

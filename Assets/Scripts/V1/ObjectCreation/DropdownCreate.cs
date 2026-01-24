@@ -3,13 +3,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DropdownCreate : UILink<int>
+public class DropdownCreate : DependeeUI<int>
 {
     protected override int GetCurrentValue => DropdownOptions.Count;
     // if not active in hierarchy, dropdown isn't selected and thus this doesn't matter.
     protected override bool GetEnabled(int input) => input >= 2 || !gameObject.activeInHierarchy;
 
-    [SerializeField] private UILinkTarget saveButton;
+    [SerializeField] private DependentUI saveButton;
     [SerializeField] private Scrollbar scrollbar;
     [SerializeField] private GameObject prefab;
     [Space]
@@ -119,7 +119,7 @@ public class DropdownCreate : UILink<int>
         [field: SerializeField] public TMP_InputField IndexInput { get; private set;  }
         [field: SerializeField] public Button IndexDrag { get; private set; }
         [field: SerializeField] public TMP_InputField NameInput { get; private set; }
-        public UILink NameInputLink { get; private set; }
+        public DependeeUI NameInputLink { get; private set; }
         [field: SerializeField] public Button DeleteOption { get; private set; }
 
         public DropdownOption(GameObject instance) : this(instance.transform.Find("Index Setter").GetComponent<TMP_InputField>(),
@@ -132,7 +132,7 @@ public class DropdownCreate : UILink<int>
             IndexInput = indexInput;
             IndexDrag = indexDrag;
             NameInput = nameInput;
-            NameInputLink = NameInput.GetComponent<UILink>();
+            NameInputLink = NameInput.GetComponent<DependeeUI>();
             DeleteOption = deleteOption;
         }
 

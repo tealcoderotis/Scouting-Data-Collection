@@ -12,7 +12,7 @@ public class GeneralInputValidator : TMPro.TMP_InputValidator
     {
         if (targetCharacters.Contains(ch) != includedCharacters) return char.MinValue;
         text = text.Insert(pos, ch.ToString());
-        pos += 1;
+        ++pos;
         return ch;
     }
 }

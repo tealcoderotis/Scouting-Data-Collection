@@ -44,7 +44,7 @@ public class FileSelection : MonoBehaviour
     public void SubmitSelected()
     {
         if (currentlySelected == null) return;
-        AppSettingsSaveManager.Instance.CurrentAppSettings.presetName = currentlySelected.GetName();
-        PresetManager.Instance.LoadPreset(AppSettingsSaveManager.Instance.CurrentAppSettings.presetName);
+        AppSettingsSaveManager.CurrentAppSettings.presetName = currentlySelected.GetName();
+        PresetManager.Instance.LoadPreset(AppSettingsSaveManager.CurrentAppSettings.presetName);
     }
 }

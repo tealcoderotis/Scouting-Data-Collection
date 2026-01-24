@@ -1,9 +1,9 @@
 public class AppSettings
 {
-    public int apiKey;
-    public string presetName;
-
+    public string apiKey;
     public int teamNumber;
-    
     public int scoutingPositionIndex;
+    public string presetName = string.Empty;
+    
+    public string currentUser = "NO USER";
 }
