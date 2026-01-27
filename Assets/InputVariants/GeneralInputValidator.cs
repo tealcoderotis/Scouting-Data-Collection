@@ -10,9 +10,13 @@ public class GeneralInputValidator : TMPro.TMP_InputValidator
 
     public override char Validate(ref string text, ref int pos, char ch)
     {
+        // if returns did work, what would I even do here? I WANT to return nothing. Just don't change...
         if (targetCharacters.Contains(ch) != includedCharacters) return char.MinValue;
+        Debug.Log($"\"{text}\" should be edited at index {pos} w/ '{ch}'");
         text = text.Insert(pos, ch.ToString());
-        ++pos;
+        pos += 1;
+
+        // THIS DOESN'T WORK???
         return ch;
     }
 }

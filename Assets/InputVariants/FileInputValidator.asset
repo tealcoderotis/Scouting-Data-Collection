@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FileInputValidator
   m_EditorClassIdentifier: 
   includedCharacters: 0
-  targetCharacters: 2f005c003a002a003f0022003c003e007c00
+  targetCharacters: 2f005c003a002a003f0022003c003e007c002e00
