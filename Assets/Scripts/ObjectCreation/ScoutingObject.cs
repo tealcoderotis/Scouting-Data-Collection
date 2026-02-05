@@ -1,16 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public abstract class ScoutingObject : MonoBehaviour
 {
-    private Button settingsButton, deleteButton;
+    private Button settingsButton, deleteButton, nullifyButton;
+    private TMPro.TextMeshProUGUI valueLabel;
+    protected bool nullified = false;
     public abstract string ObjectTypeIdentifier { get; }
 
     protected virtual void Awake()
     {
         settingsButton = transform.Find("Settings Button").GetComponent<Button>();
         deleteButton = transform.Find("Delete Button").GetComponent<Button>();
+        nullifyButton = transform.Find("Nullify Button").GetComponent<Button>();
+        nullifyButton.onClick.AddListener(Nullify);
+        valueLabel = transform.Find("Label").GetComponent<TMPro.TextMeshProUGUI>();
         Scouter.Instance.onEnterScouter += SetEditorButtons;
         settingsButton.onClick.AddListener(() => Scouter.Instance.ObjectCreation.EnterScoutingObjectEditor(this));
         deleteButton.onClick.AddListener(() => Destroy(gameObject));
@@ -20,9 +26,29 @@ public abstract class ScoutingObject : MonoBehaviour
     {
         settingsButton.gameObject.SetActive(isEditing);
         deleteButton.gameObject.SetActive(isEditing);
+        nullifyButton.gameObject.SetActive(!isEditing);
+    }
+
+    private void Nullify() {
+        nullified = !nullified;
+        if (nullified) {
+            valueLabel.fontStyle = FontStyles.Strikethrough;
+        }
+        else {
+            valueLabel.fontStyle = FontStyles.Normal;
+        }
     }
     
-    public abstract void ResetValues();
+    public virtual void ResetValues() {
+        nullified = false;
+        valueLabel.fontStyle = FontStyles.Normal;
+    }
+
+    public bool Nullified {
+        get {
+            return nullified;
+        }
+    }
 
     public abstract MatchData.ArbritraryData GetMatchData();
     public abstract ScoutingObjectSettings GetBaseSettings();

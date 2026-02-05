@@ -25,6 +25,7 @@ public class ScoutingTextObject : ScoutingObject<string, ScoutingTextObject.Scou
     public override void ResetValues()
     {
         inputField.text = "";
+        base.ResetValues();
     }
 
     // AddListener doesn't accept it if it does not have a string paramater

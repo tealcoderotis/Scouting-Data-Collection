@@ -29,6 +29,7 @@ public class ScoutingDropdownObject : ScoutingObject<string, ScoutingDropdownObj
     {
         dropdown.ClearOptions();
         dropdown.AddOptions(GetDropdownOptions);
+        base.ResetValues();
     }
 
 

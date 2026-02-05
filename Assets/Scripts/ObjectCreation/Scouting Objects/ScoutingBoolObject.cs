@@ -19,6 +19,7 @@ public class ScoutingBoolObject : ScoutingObject<bool, ScoutingBoolObject.Scouti
     public override void ResetValues()
     {
         toggle.isOn = Settings.defaultValue;
+        base.ResetValues();
     }
 
 

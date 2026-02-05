@@ -33,6 +33,7 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
     public override void ResetValues()
     {
         SetCurrentValue(Settings.defaultValue);
+        base.ResetValues();
     }
 
     public void ParseTextInput(string input) => SetCurrentValue(input == "" ? Settings.defaultValue : int.Parse(input));

@@ -35,7 +35,7 @@ public class Scouter : MonoBehaviour
         onEnterScouter(isEditing);
 
         // for some reason sets it as a negative value?
-        content.offsetMax = new(-(isEditing ? 220 : 20), 0);
+        content.offsetMax = new(-(isEditing ? 220 : 120), 0);
     }
 
     public void Save()
