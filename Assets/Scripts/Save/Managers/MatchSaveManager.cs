@@ -23,8 +23,13 @@ public class MatchSaveManager : MonoBehaviour
             for (int scoutingData = 0; scoutingData < scouterContent.GetChild(section).childCount; scoutingData++)
             {
                 ScoutingObject scoutingObject = scouterContent.GetChild(section).GetChild(scoutingData).GetComponent<ScoutingObject>();
+                MatchData.ArbritraryData arbitraryMatchData = scoutingObject.GetMatchData();
                 if (!scoutingObject.Nullified) {
-                    matchData.uniqueData.Add(scoutingObject.GetMatchData());
+                    matchData.uniqueData.Add(arbitraryMatchData);
+                }
+                else
+                {
+                    matchData.uniqueData.Add(new MatchData.ArbritraryData(arbitraryMatchData.name, arbitraryMatchData.type, ""));
                 }
                 if (resetValues) scoutingObject.ResetValues();
             }
