@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -51,6 +52,9 @@ public abstract class ScoutingObject : MonoBehaviour
     }
 
     public abstract MatchData.ArbritraryData GetMatchData();
+    public virtual List<MatchData> GetCycles() {
+        return null;
+    }
     public abstract ScoutingObjectSettings GetBaseSettings();
     public abstract object GetSettings();
     public abstract void SetSettingsFromJson(string json);
@@ -93,5 +97,10 @@ public abstract class ScoutingObject<EventType, SettingsType> : ScoutingObject w
     protected virtual void Start()
     {
         transform.Find("Label").GetComponent<TMPro.TextMeshProUGUI>().text = Settings.objectName;
+    }
+    public string objectName {
+        get {
+            return Settings.objectIdentifier;
+        }
     }
 }

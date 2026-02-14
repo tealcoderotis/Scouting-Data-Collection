@@ -11,6 +11,7 @@ public class SaveManager
     public readonly static string UserSettingsPath = Path.Combine(BasePath, "User_Settings");
     public readonly static string ScoutingPresets = Path.Combine(BasePath, "Scouting_Presets");
     public readonly static string SavedMatches = Path.Combine(BasePath, "Saved_Matches");
+    public readonly static string SavedMatchCycles = Path.Combine(BasePath, "Saved_Cycles");
     public static string EventSaveString(string eventKey) => $"EVENT_{eventKey}.csv";
 
 
@@ -81,6 +82,27 @@ public class SaveManager
     {
         ValidateDirectory(SavedMatches);
         string competitionPath = Path.Combine(SavedMatches, EventSaveString(data.EventKey));
+        MatchData.ArbritraryData[] content = data.GetFullData();
+        StringBuilder sb = new();
+        if (!File.Exists(competitionPath))
+        {
+            for (int i = 0; i < content.Length; i++)
+                sb.Append($"{content[i].name}{(i < content.Length - 1 ? ',' : "")}");
+            sb.Append('\n');
+            for (int i = 0; i < content.Length; i++)
+                sb.Append($"{MatchData.ParseTypeForCSV(content[i].type.Name)}{(i < content.Length - 1 ? ',' : "")}");
+        }
+        else sb.Append(File.ReadAllText(competitionPath));
+        sb.Append('\n');
+        for (int i = 0; i < content.Length; i++)
+            sb.Append($"\"{content[i].value}\"{(i < content.Length - 1 ? ',' : "")}");
+        File.WriteAllText(competitionPath, sb.ToString());
+    }
+
+    public static void SaveCycleData(MatchData data)
+    {
+        ValidateDirectory(SavedMatchCycles);
+        string competitionPath = Path.Combine(SavedMatchCycles, EventSaveString(data.EventKey));
         MatchData.ArbritraryData[] content = data.GetFullData();
         StringBuilder sb = new();
         if (!File.Exists(competitionPath))
