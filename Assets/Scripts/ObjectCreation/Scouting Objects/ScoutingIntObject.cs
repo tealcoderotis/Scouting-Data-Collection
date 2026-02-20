@@ -20,6 +20,7 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
     protected bool isCycleable => Settings.cycleable;
 
     protected DateTime lastPressTime;
+    protected bool firstCycle = true;
     protected List<TimeSpan> cycleTimes;
 
     protected override void Awake()
@@ -37,6 +38,7 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
         if (isCycleable)
         {
             lastPressTime = DateTime.Now;
+            firstCycle = true;
             cycleTimes = new();
         }
     }
@@ -47,6 +49,7 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
         if (isCycleable)
         {
             lastPressTime = DateTime.Now;
+            firstCycle = true;
             cycleTimes = new();
         }
     }
@@ -60,10 +63,14 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
         if (isCycleable)
         {
             DateTime currentTime = DateTime.Now;
-            if (lastPressTime != null)
+            if (!firstCycle)
             {
                 Debug.Log("Cycle time: " + (currentTime - lastPressTime).TotalSeconds + " s");
                 cycleTimes.Add(currentTime - lastPressTime);
+            }
+            else
+            {
+                firstCycle = false;
             }
             lastPressTime = currentTime;
         }
