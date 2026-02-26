@@ -44,6 +44,7 @@ public class APIData
 
 
         public static IEnumerator<WrapperClass<SimpleEvent[]>> GetWithTeamInYear(string team_key, int year) => APICaller.GetInformation<WrapperClass<SimpleEvent[]>>($"/team/{team_key}/events/{year}/simple");
+        public static IEnumerator<SimpleEvent> GetEvent(string event_key) => APICaller.GetInformation<SimpleEvent>($"/event/{event_key}/simple");
     }
     [Serializable]
     public class SimpleMatch
@@ -116,7 +117,7 @@ public class APIData
     public static IEnumerator SetToCurrentEvent(MonoBehaviour src, string overrideKey)
     {
         CurrentEvent = null;
-        string scouter_team_key = "frc4450";
+        /*string scouter_team_key = "frc4450";
         DateTime currentTime = DateTime.Now.Date;
 
         IEnumerator iterator = SimpleEvent.GetWithTeamInYear(scouter_team_key, currentTime.Year);
@@ -136,10 +137,16 @@ public class APIData
             IsTesting = events[i].StartDate > currentTime;
             CurrentEvent = events[i];
             if (overrideKey == "") break;
-        }
+        }*/
+
+        IEnumerator iterator = SimpleEvent.GetEvent(overrideKey);
+        yield return src.StartCoroutine(iterator);
+        if (iterator.Current == null) yield break;
+        SimpleEvent overrideEvent = (SimpleEvent)iterator.Current; 
+
         if (overrideEvent != null) CurrentEvent = overrideEvent;
         // so that we can test on last known event if no future known events exist (assuming they insert at 0)
-        if (CurrentEvent == null && events.Length > 0) CurrentEvent = events[0];
+        //if (CurrentEvent == null && events.Length > 0) CurrentEvent = events[0];
 
 
         if (CurrentEvent == null) CurrentEventMatches = null;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,8 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
     protected int ActiveMinValue => Settings.hasMinValue ? Settings.minValue : int.MinValue;
     protected int ActiveMaxValue => Settings.hasMaxValue ? Settings.maxValue : int.MaxValue;
     protected bool isCycleable => Settings.cycleable;
+    protected int IncrementAmount => Settings.IncrementAmount;
+    protected bool PercentLabel => Settings.PercentLabel;
 
     protected DateTime lastPressTime;
     protected bool firstCycle = true;
@@ -54,7 +57,18 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
         }
     }
 
-    public void ParseTextInput(string input) => SetCurrentValue(input == "" ? Settings.defaultValue : int.Parse(input));
+    public void ParseTextInput(string input)
+    {
+        if (input == "")
+        {
+            SetCurrentValue(Settings.defaultValue);
+        }
+        else
+        {
+            input = new string(input.Where(char.IsDigit).ToArray());
+            SetCurrentValue(int.Parse(input));
+        }
+    }
 
     public void DecrementValue() => DeCycle();
     public void IncrementValue() => Cycle();
@@ -74,7 +88,7 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
             }
             lastPressTime = currentTime;
         }
-        ChangeCurrentValue(1);
+        ChangeCurrentValue(IncrementAmount);
     }
     public void DeCycle()
     {
@@ -87,7 +101,7 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
             }
             lastPressTime = currentTime;
         }
-        ChangeCurrentValue(-1);
+        ChangeCurrentValue(-IncrementAmount);
     }
     public void ChangeCurrentValue(string change) => SetCurrentValue(currentValue + int.Parse(change));
     public void ChangeCurrentValue(int change) => SetCurrentValue(currentValue + change);
@@ -95,7 +109,14 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
     public void SetCurrentValue(int value)
     {
         currentValue = System.Math.Clamp(value, ActiveMinValue, ActiveMaxValue);
-        valueDisplay.SetTextWithoutNotify(currentValue.ToString());
+        if (PercentLabel)
+        {
+            valueDisplay.SetTextWithoutNotify(currentValue.ToString() + "%");
+        }
+        else
+        {
+            valueDisplay.SetTextWithoutNotify(currentValue.ToString());
+        }
     }
     public override List<MatchData> GetCycles()
     {
@@ -128,5 +149,7 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
         [SerializeField] public bool hasMaxValue;
         [SerializeField] public int maxValue;
         [SerializeField] public bool cycleable;
+        [SerializeField] public int IncrementAmount;
+        [SerializeField] public bool PercentLabel;
     }
 }
