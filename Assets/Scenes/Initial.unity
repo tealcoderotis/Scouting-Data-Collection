@@ -25968,7 +25968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3841605248229238421, guid: fec65a584f6eaf546a2fe7d935627654, type: 3}
       propertyPath: Settings.objectIdentifier
-      value: fuel_per_cycle_stimate
+      value: fuel_per_cycle_estimate
       objectReference: {fileID: 0}
     - target: {fileID: 9041458372215188314, guid: fec65a584f6eaf546a2fe7d935627654, type: 3}
       propertyPath: m_Name
