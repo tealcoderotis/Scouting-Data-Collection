@@ -12,6 +12,7 @@ public class SaveManager
     public readonly static string ScoutingPresets = Path.Combine(BasePath, "Scouting_Presets");
     public readonly static string SavedMatches = Path.Combine(BasePath, "Saved_Matches");
     public readonly static string SavedMatchCycles = Path.Combine(BasePath, "Saved_Cycles");
+    public readonly static string PreMatchSettings = Path.Combine(BasePath, "Pre_Match");
     public static string EventSaveString(string eventKey) => $"EVENT_{eventKey}.csv";
 
 
@@ -65,6 +66,11 @@ public class SaveManager
         string path = Path.Combine(ScoutingPresets, presetName);
         if (!File.Exists(path)) return new PresetData[] { };
         return JsonUtility.FromJson<ArrayWrapper<PresetData>>(File.ReadAllText(path)).array;
+    }
+    public static void SavePreMatchSettings(PrematchData.PrematchSaveData preMatchData)
+    {
+        ValidateDirectory(PreMatchSettings);
+        File.WriteAllText(Path.Combine(PreMatchSettings, "pre_match.json"), JsonUtility.ToJson(preMatchData));
     }
 
     public static void LoadEventData()
