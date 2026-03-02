@@ -1881,6 +1881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 100
+  inheritDefault: 0
 --- !u!114 &235109334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2100,6 +2101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 0
+  inheritDefault: 0
 --- !u!114 &236541456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5637,6 +5639,7 @@ GameObject:
   - component: {fileID: 508246462}
   - component: {fileID: 508246463}
   - component: {fileID: 508246465}
+  - component: {fileID: 508246466}
   m_Layer: 0
   m_Name: SINGLETONS
   m_TagString: Untagged
@@ -5764,6 +5767,26 @@ MonoBehaviour:
   inputPrevention: {fileID: 740103911}
   feedbackDisplay: {fileID: 1034754353}
   defaultDuration: 2
+--- !u!114 &508246466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508246457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51608d010b3791a4385e38f0dd76c496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoutingTeamNumber: {fileID: 3717427918913244403}
+  username: {fileID: 1124919302}
+  scoutingIndex: {fileID: 1470889469}
+  rawMatchNumber: {fileID: 557116408}
+  compLevelDisplay: {fileID: 1492441524}
+  setNumberDisplay: {fileID: 1677220337}
+  matchNumberDisplay: {fileID: 2035293361}
+  scoutedTeamNumber: {fileID: 918060500}
 --- !u!1 &508812130
 GameObject:
   m_ObjectHideFlags: 0
@@ -6327,6 +6350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 0
+  inheritDefault: 1
 --- !u!114 &557116408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6413,7 +6437,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: 0
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -9158,6 +9182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 0
+  inheritDefault: 0
 --- !u!1001 &809741684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10747,6 +10772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 0
+  inheritDefault: 0
 --- !u!114 &856810551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11262,6 +11288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 0
+  inheritDefault: 1
 --- !u!114 &918060500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11348,7 +11375,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: 0
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -11744,6 +11771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 0
+  inheritDefault: 0
 --- !u!114 &928706232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14603,7 +14631,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -75.00003, y: 0}
+  m_AnchoredPosition: {x: -75.000015, y: 0}
   m_SizeDelta: {x: -150, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1083672696
@@ -16769,6 +16797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 0
+  inheritDefault: 0
 --- !u!114 &1235223306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22340,6 +22369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 0
+  inheritDefault: 1
 --- !u!114 &1677220337 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3993919580312234113, guid: eda5136669bb2d3448ac7aa78bcd83fb, type: 3}
@@ -22562,7 +22592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -75.00003, y: 0}
+  m_AnchoredPosition: {x: -75.000015, y: 0}
   m_SizeDelta: {x: -150, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1704779776
@@ -26840,6 +26870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 0
+  inheritDefault: 1
 --- !u!114 &2035293361 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3993919580312234113, guid: eda5136669bb2d3448ac7aa78bcd83fb, type: 3}
@@ -28205,6 +28236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultString: 0
+  inheritDefault: 1
 --- !u!114 &3717427918913244403 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3993919580312234113, guid: eda5136669bb2d3448ac7aa78bcd83fb, type: 3}

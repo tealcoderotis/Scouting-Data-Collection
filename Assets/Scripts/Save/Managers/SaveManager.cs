@@ -67,10 +67,22 @@ public class SaveManager
         if (!File.Exists(path)) return new PresetData[] { };
         return JsonUtility.FromJson<ArrayWrapper<PresetData>>(File.ReadAllText(path)).array;
     }
-    public static void SavePreMatchSettings(PrematchData.PrematchSaveData preMatchData)
+    public static void SavePreMatchSettings(PrematchSaveManager.PrematchSaveData preMatchData)
     {
         ValidateDirectory(PreMatchSettings);
         File.WriteAllText(Path.Combine(PreMatchSettings, "pre_match.json"), JsonUtility.ToJson(preMatchData));
+    }
+
+    public static PrematchSaveManager.PrematchSaveData? LoadPreMatchSettings()
+    {
+        if (File.Exists(Path.Combine(PreMatchSettings, "pre_match.json")))
+        {
+            return JsonUtility.FromJson<PrematchSaveManager.PrematchSaveData>(File.ReadAllText(Path.Combine(PreMatchSettings, "pre_match.json")));
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public static void LoadEventData()
