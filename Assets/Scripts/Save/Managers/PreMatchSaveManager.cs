@@ -18,14 +18,14 @@ public class PrematchSaveManager : MonoBehaviour
     private void Start()
     {
         LoadPreMatchData();
-        scoutingTeamNumber.onEndEdit.AddListener(_ => SavePreMatchData());
-        username.onEndEdit.AddListener(_ => SavePreMatchData());
+        scoutingTeamNumber.onValueChanged.AddListener(_ => SavePreMatchData());
+        username.onValueChanged.AddListener(_ => SavePreMatchData());
         scoutingIndex.onValueChanged.AddListener(_ => SavePreMatchData());
-        rawMatchNumber.onEndEdit.AddListener(_ => SavePreMatchData());
+        rawMatchNumber.onValueChanged.AddListener(_ => SavePreMatchData());
         compLevelDisplay.onValueChanged.AddListener(_ => SavePreMatchData());
-        setNumberDisplay.onEndEdit.AddListener(_ => SavePreMatchData());
-        matchNumberDisplay.onEndEdit.AddListener(_ => SavePreMatchData());
-        scoutedTeamNumber.onEndEdit.AddListener(_ => SavePreMatchData());
+        setNumberDisplay.onValueChanged.AddListener(_ => SavePreMatchData());
+        matchNumberDisplay.onValueChanged.AddListener(_ => SavePreMatchData());
+        scoutedTeamNumber.onValueChanged.AddListener(_ => SavePreMatchData());
     }
 
     private void SavePreMatchData()
@@ -47,14 +47,15 @@ public class PrematchSaveManager : MonoBehaviour
         if (nullableData.HasValue)
         {
             PrematchSaveData data = nullableData.Value;
-            scoutingTeamNumber.text = data.scoutingTeam.ToString();
+            scoutingTeamNumber.text = data.scoutingTeam;
             username.text = data.scoutingUser;
-            scoutedTeamNumber.text = data.scoutedTeam.ToString();
+            scoutedTeamNumber.text = data.scoutedTeam;
             compLevelDisplay.value = data.compLevel;
-            rawMatchNumber.text = data.rawMatchNumber.ToString();
-            setNumberDisplay.text = data.setNumber.ToString();
-            matchNumberDisplay.text = data.matchNumber.ToString();
+            rawMatchNumber.text = data.rawMatchNumber;
+            setNumberDisplay.text = data.setNumber;
+            matchNumberDisplay.text = data.matchNumber;
             scoutingIndex.value = data.scoutingIndex;
+            ScoutingCore.CurrentGlobalMatchIndex = int.Parse(data.rawMatchNumber) - 1;
         }
     }
 
