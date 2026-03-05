@@ -7317,7 +7317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editorMenuSwapper: {fileID: 2010970440}
-  scoutingMenu: {fileID: 2066070824}
+  scoutingMenu: {fileID: 0}
   intGetter:
     prefab: {fileID: 3841605248229238421, guid: fec65a584f6eaf546a2fe7d935627654, type: 3}
     objectName: {fileID: 973497398}
@@ -10564,11 +10564,11 @@ MonoBehaviour:
   scoutingTeamNumber: {fileID: 3717427918913244403}
   username: {fileID: 1124919302}
   scoutingIndex: {fileID: 1470889469}
-  rawMatchNumber: {fileID: 928706232}
+  rawMatchNumber: {fileID: 557116408}
   compLevelDisplay: {fileID: 1492441524}
   setNumberDisplay: {fileID: 1677220337}
   matchNumberDisplay: {fileID: 2035293361}
-  scoutedTeamNumber: {fileID: 856810551}
+  scoutedTeamNumber: {fileID: 918060500}
 --- !u!1001 &849803401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12398,7 +12398,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 848528520}
+      - m_Target: {fileID: 826138896}
         m_TargetAssemblyTypeName: PrematchData, Assembly-CSharp
         m_MethodName: AutoUpdate
         m_Mode: 1
@@ -12461,7 +12461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UILinks:
-  - link: {fileID: 856810554}
+  - link: {fileID: 918060498}
     state: 1
 --- !u!1 &957393974
 GameObject:
@@ -14631,7 +14631,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -75.000015, y: 0}
+  m_AnchoredPosition: {x: -75, y: 0}
   m_SizeDelta: {x: -150, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1083672696
@@ -22592,7 +22592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -75.000015, y: 0}
+  m_AnchoredPosition: {x: -75, y: 0}
   m_SizeDelta: {x: -150, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1704779776

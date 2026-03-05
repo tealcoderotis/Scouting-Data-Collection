@@ -17,7 +17,6 @@ public class PrematchData : MonoBehaviour
 
     private void Start()
     {
-        scoutingIndex.value = AppSettingsSaveManager.Instance.CurrentAppSettings.scoutingPositionIndex;
         rawMatchNumber.onEndEdit.AddListener(SetMatchNumber);
         scoutingIndex.onValueChanged.AddListener(_ => SetMatchNumber(globalMatchNumber));
         scoutingIndex.onValueChanged.AddListener(UpdateScoutingPositionIndex);
@@ -57,7 +56,7 @@ public class PrematchData : MonoBehaviour
         }
         else
         {
-            matchNumberDisplay.text = (int.Parse(matchNumberDisplay.text) + 1).ToString();
+            matchNumberDisplay.text = (int.Parse(rawMatchNumber.text)).ToString();
             scoutedTeamNumber.interactable = true;
             scoutedTeamNumber.text = "";
         }

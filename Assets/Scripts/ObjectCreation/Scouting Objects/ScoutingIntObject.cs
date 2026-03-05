@@ -99,7 +99,6 @@ public class ScoutingIntObject : ScoutingObject<int, ScoutingIntObject.ScoutingI
             {
                 cycleTimes.RemoveAt(cycleTimes.Count - 1);
             }
-            lastPressTime = currentTime;
         }
         ChangeCurrentValue(-IncrementAmount);
     }
