@@ -56,11 +56,13 @@ public class PrematchData : MonoBehaviour
         }
         else
         {
-            matchNumberDisplay.text = (int.Parse(rawMatchNumber.text)).ToString();
+            matchNumberDisplay.text = (index + 1).ToString();
             scoutedTeamNumber.interactable = true;
             scoutedTeamNumber.text = "";
         }
-        rawMatchNumber.SetTextWithoutNotify((globalMatchNumber + 1).ToString());
+        rawMatchNumber.onEndEdit.RemoveListener(SetMatchNumber);
+        rawMatchNumber.text = (globalMatchNumber + 1).ToString();
+        rawMatchNumber.onEndEdit.AddListener(SetMatchNumber);
         ScoutingCore.CurrentGlobalMatchIndex = globalMatchNumber;
     }
 }
