@@ -9,6 +9,7 @@ public abstract class ScoutingObject : MonoBehaviour
     private Button settingsButton, deleteButton, nullifyButton;
     private TMPro.TextMeshProUGUI valueLabel;
     protected bool nullified = false;
+    [SerializeField] bool nullifiedDefault = false;
     public abstract string ObjectTypeIdentifier { get; }
 
     protected virtual void Awake()
@@ -18,6 +19,16 @@ public abstract class ScoutingObject : MonoBehaviour
         nullifyButton = transform.Find("Nullify Button").GetComponent<Button>();
         nullifyButton.onClick.AddListener(Nullify);
         valueLabel = transform.Find("Label").GetComponent<TMPro.TextMeshProUGUI>();
+        if (nullifiedDefault)
+        {
+            nullified = true;
+            valueLabel.fontStyle = FontStyles.Strikethrough;
+        }
+        else
+        {
+            nullified = false;
+            valueLabel.fontStyle = FontStyles.Normal;
+        }
         Scouter.Instance.onEnterScouter += SetEditorButtons;
         settingsButton.onClick.AddListener(() => Scouter.Instance.ObjectCreation.EnterScoutingObjectEditor(this));
         deleteButton.onClick.AddListener(() => Destroy(gameObject));
@@ -41,8 +52,16 @@ public abstract class ScoutingObject : MonoBehaviour
     }
     
     public virtual void ResetValues() {
-        nullified = false;
-        valueLabel.fontStyle = FontStyles.Normal;
+        if (nullifiedDefault)
+        {
+            nullified = true;
+            valueLabel.fontStyle = FontStyles.Strikethrough;
+        }
+        else
+        {
+            nullified = false;
+            valueLabel.fontStyle = FontStyles.Normal;
+        }
     }
 
     public bool Nullified {
