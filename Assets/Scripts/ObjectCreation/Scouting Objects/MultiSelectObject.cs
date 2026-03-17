@@ -10,44 +10,60 @@ public class MultiSelectObject : ScoutingObject<string, MultiSelectObject.MultiS
 
     Button button;
     protected override string Value => GetSelectedValues();
-    private List<int> selectedOptions = new List<int>();
-    protected List<string> GetDropdownOptions
+    private List<MultiSelectItem> items = new List<MultiSelectItem>();
+    public MultiSelectItem[] Items 
     {
-        get
-        {
-            List<string> options = new();
-            for (int i = 0; i < Settings.multiSelectOptions.Count; i++)
-                options.Add(Settings.multiSelectOptions[i].optionName);
-            return options;
+        get {
+            return items.ToArray();
         }
     }
 
     protected override void Awake()
     {
         base.Awake();
+        foreach (MultiSelectObjectSettings.MultiSelectOptionData option in Settings.multiSelectOptions)
+        {
+            items.Add(new MultiSelectItem(option.optionName, option.optionID, false));
+        }
         button = transform.Find("Choose Button").GetComponent<Button>();
         button.onClick.AddListener(() => DialogManager.Instance.ShowSelectDialog(this));
     }
     public override void ResetValues()
     {
-        GetComponentInChildren<Text>();
-        button.GetComponentInChildren<TMP_Text>().text = "None";
-        selectedOptions = new List<int>();
+        for (int i = 0; i < items.Count; i++)
+        {
+            MultiSelectItem temp = items[i];
+            temp.selected = false;
+            items[i] = temp;
+        }
+        button.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "None";
         base.ResetValues();
     }
 
-    public void SetValues(List<int> selectedOptions)
+    public void SetValues(List<MultiSelectItem> newItems)
     {
-        this.selectedOptions = selectedOptions;
+        items = newItems;
+        string buttonContent = GetSelectedValues();
+        if (buttonContent != "")
+        {
+            button.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = buttonContent;
+        }
+        else
+        {
+            button.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "None";
+        }
     }
 
     private string GetSelectedValues()
     {
         string val = "";
-        foreach (int option in selectedOptions)
+        foreach (MultiSelectItem item in items)
         {
-            string text = GetDropdownOptions[option];
-            val += text + ", ";
+            if (item.selected)
+            {
+                string text = item.optionID;
+                val += text + ", ";
+            }
         }
         if (val.Length > 0)
         {
@@ -79,4 +95,18 @@ public class MultiSelectObject : ScoutingObject<string, MultiSelectObject.MultiS
             }
         }
     }
+
+    public struct MultiSelectItem
+        {
+            public string optionName;
+            public string optionID;
+            public bool selected;
+
+            public MultiSelectItem(string optionName, string optionID, bool selected)
+            {
+                this.optionName = optionName;
+                this.optionID = optionID;
+                this.selected = selected;
+            }
+        }
 }
