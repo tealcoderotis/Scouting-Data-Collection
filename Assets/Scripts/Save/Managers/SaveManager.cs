@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SaveManager
 {
-    public readonly static string BasePath = Application.persistentDataPath;
+    public readonly static string BasePath = Path.Combine(Application.dataPath, "Data");
     public readonly static string AppSettingsPath = Path.Combine(BasePath, "App_Settings.txt");
     public readonly static string EventInfoPath = Path.Combine(BasePath, "Event_Info.txt");
     public readonly static string UserSettingsPath = Path.Combine(BasePath, "User_Settings");

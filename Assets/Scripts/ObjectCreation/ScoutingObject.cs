@@ -6,19 +6,33 @@ using TMPro;
 [System.Serializable]
 public abstract class ScoutingObject : MonoBehaviour
 {
-    private Button settingsButton, deleteButton, nullifyButton;
-    private TMPro.TextMeshProUGUI valueLabel;
+    [SerializeField]
+    protected Button settingsButton, deleteButton, nullifyButton;
+    [SerializeField]
+    protected TMPro.TextMeshProUGUI valueLabel;
     protected bool nullified = false;
     [SerializeField] bool nullifiedDefault = false;
     public abstract string ObjectTypeIdentifier { get; }
 
     protected virtual void Awake()
     {
-        settingsButton = transform.Find("Settings Button").GetComponent<Button>();
-        deleteButton = transform.Find("Delete Button").GetComponent<Button>();
-        nullifyButton = transform.Find("Nullify Button").GetComponent<Button>();
+        if (settingsButton == null)
+        {
+            settingsButton = transform.Find("Settings Button").GetComponent<Button>();
+        }
+        if (deleteButton == null)
+        {
+            deleteButton = transform.Find("Delete Button").GetComponent<Button>();
+        }
+        if (nullifyButton == null)
+        {
+            nullifyButton = transform.Find("Nullify Button").GetComponent<Button>();
+        }
         nullifyButton.onClick.AddListener(Nullify);
-        valueLabel = transform.Find("Label").GetComponent<TMPro.TextMeshProUGUI>();
+        if (valueLabel == null)
+        {
+            valueLabel = transform.Find("Label").GetComponent<TMPro.TextMeshProUGUI>();
+        }
         if (nullifiedDefault)
         {
             nullified = true;
@@ -115,7 +129,7 @@ public abstract class ScoutingObject<EventType, SettingsType> : ScoutingObject w
     }
     protected virtual void Start()
     {
-        transform.Find("Label").GetComponent<TMPro.TextMeshProUGUI>().text = Settings.objectName;
+        valueLabel.text = Settings.objectName;
     }
     public string objectName {
         get {
