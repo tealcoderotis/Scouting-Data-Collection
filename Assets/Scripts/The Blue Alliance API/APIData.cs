@@ -159,5 +159,6 @@ public class APIData
             forSort.Sort(matchSorter);
             CurrentEventMatches = forSort.ToArray();
         }
+        SaveManager.SaveEventData();
     }
 }

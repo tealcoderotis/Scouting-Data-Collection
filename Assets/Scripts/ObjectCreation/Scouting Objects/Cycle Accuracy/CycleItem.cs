@@ -13,13 +13,16 @@ public class CycleItem : MonoBehaviour
     Button deleteButton;
     List<GameObject> buttons = new List<GameObject>();
     int currentValue = -1;
+    private ScoutingCycleAccuracyObject parentScoutingObject;
+    TextMeshProUGUI indexLabel;
 
     void Awake()
     {
         buttonPrefab = Resources.Load<GameObject>("Prefabs/Button");
         valueUI = transform.Find("Value_UI");
         deleteButton = transform.Find("Delete Button").gameObject.GetComponent<Button>();
-        deleteButton.onClick.AddListener(() => Destroy(gameObject));
+        deleteButton.onClick.AddListener(() => Delete());
+        indexLabel = transform.Find("Label").gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     public void CreateButtons(int count)
@@ -28,6 +31,16 @@ public class CycleItem : MonoBehaviour
         {
             CreateButton(i);
         }
+    }
+
+    public void SetLabel(int value)
+    {
+        indexLabel.text = $"Cycle: {value}";
+    }
+
+    public void AddParentScoutingObejct(ScoutingCycleAccuracyObject parentScoutingObject)
+    {
+        this.parentScoutingObject = parentScoutingObject;
     }
 
     private void CreateButton(int number)
@@ -77,6 +90,15 @@ public class CycleItem : MonoBehaviour
             {
                 buttons[i].GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
             }
+        }
+    }
+
+    private void Delete()
+    {
+        DestroyImmediate(gameObject);
+        if (parentScoutingObject != null)
+        {
+            parentScoutingObject.ItemDelete();
         }
     }
 }

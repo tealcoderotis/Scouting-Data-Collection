@@ -19,6 +19,7 @@ public class MatchSaveManager : MonoBehaviour
     {
         MatchData matchData = new();
         List<MatchData> cycleData = new();
+        List<MatchData> accuracyCycleData = new();
         externalMatchDataInfo.UpdateMatchSaveManagerValues(matchData);
         for (int section = 1; section < scouterContent.childCount; section++)
         {
@@ -36,6 +37,14 @@ public class MatchSaveManager : MonoBehaviour
                             cycleData.Add(cycle);
                         }
                     }
+                    if (scoutingObject.GetCycleAccuracy() != null)
+                    {
+                        foreach (MatchData cycle in scoutingObject.GetCycleAccuracy())
+                        {
+                            externalMatchDataInfo.UpdateMatchSaveManagerValues(cycle);
+                            accuracyCycleData.Add(cycle);
+                        }
+                    }
                 }
                 else
                 {
@@ -48,6 +57,10 @@ public class MatchSaveManager : MonoBehaviour
         foreach (MatchData cycle in cycleData)
         {
             SaveManager.SaveCycleData(cycle);
+        }
+        foreach (MatchData cycle in accuracyCycleData)
+        {
+            SaveManager.SaveCycleAccuracyData(cycle);
         }
         StartCoroutine(FeedbackManager.Instance.DoFeedback($"Saving data to {SaveManager.EventSaveString(matchData.EventKey)}"));
     }

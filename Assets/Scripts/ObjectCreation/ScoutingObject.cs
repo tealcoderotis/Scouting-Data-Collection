@@ -88,6 +88,9 @@ public abstract class ScoutingObject : MonoBehaviour
     public virtual List<MatchData> GetCycles() {
         return null;
     }
+    public virtual List<MatchData> GetCycleAccuracy() {
+        return null;
+    }
     public abstract ScoutingObjectSettings GetBaseSettings();
     public abstract object GetSettings();
     public abstract void SetSettingsFromJson(string json);

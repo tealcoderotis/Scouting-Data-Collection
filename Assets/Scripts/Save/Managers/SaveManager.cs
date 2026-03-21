@@ -12,19 +12,27 @@ public class SaveManager
     public readonly static string ScoutingPresets = Path.Combine(BasePath, "Scouting_Presets");
     public readonly static string SavedMatches = Path.Combine(BasePath, "Saved_Matches");
     public readonly static string SavedMatchCycles = Path.Combine(BasePath, "Saved_Cycles");
+    public readonly static string SavedMatchCycleAccuracy = Path.Combine(BasePath, "Saved_Cycle_Accuracy");
     public readonly static string PreMatchSettings = Path.Combine(BasePath, "Pre_Match");
     public static string EventSaveString(string eventKey) => $"EVENT_{eventKey}.csv";
 
 
     public static bool ValidateDirectory(string directoryPath)
     {
+        CreateBase();
         bool exists = Directory.Exists(directoryPath);
         if (!exists) Directory.CreateDirectory(directoryPath);
         return exists;
     }
 
+    private static void CreateBase()
+    {
+        if (!Directory.Exists(BasePath)) Directory.CreateDirectory(BasePath);
+    }
+
     public static void SaveAppSettings()
     {
+        CreateBase();
         File.WriteAllText(AppSettingsPath, JsonUtility.ToJson(AppSettingsSaveManager.Instance.CurrentAppSettings));
     }
     public static AppSettings GetAppSettings()
@@ -92,6 +100,7 @@ public class SaveManager
     }
     public static void SaveEventData()
     {
+        CreateBase();
         File.WriteAllText(EventInfoPath, JsonUtility.ToJson(ScoutingCore.EventData));
     }
 
@@ -121,6 +130,27 @@ public class SaveManager
     {
         ValidateDirectory(SavedMatchCycles);
         string competitionPath = Path.Combine(SavedMatchCycles, EventSaveString(data.EventKey));
+        MatchData.ArbritraryData[] content = data.GetFullData();
+        StringBuilder sb = new();
+        if (!File.Exists(competitionPath))
+        {
+            for (int i = 0; i < content.Length; i++)
+                sb.Append($"{content[i].name}{(i < content.Length - 1 ? ',' : "")}");
+            sb.Append('\n');
+            for (int i = 0; i < content.Length; i++)
+                sb.Append($"{MatchData.ParseTypeForCSV(content[i].type.Name)}{(i < content.Length - 1 ? ',' : "")}");
+        }
+        else sb.Append(File.ReadAllText(competitionPath));
+        sb.Append('\n');
+        for (int i = 0; i < content.Length; i++)
+            sb.Append($"\"{content[i].value}\"{(i < content.Length - 1 ? ',' : "")}");
+        File.WriteAllText(competitionPath, sb.ToString());
+    }
+
+    public static void SaveCycleAccuracyData(MatchData data)
+    {
+        ValidateDirectory(SavedMatchCycleAccuracy);
+        string competitionPath = Path.Combine(SavedMatchCycleAccuracy, EventSaveString(data.EventKey));
         MatchData.ArbritraryData[] content = data.GetFullData();
         StringBuilder sb = new();
         if (!File.Exists(competitionPath))
