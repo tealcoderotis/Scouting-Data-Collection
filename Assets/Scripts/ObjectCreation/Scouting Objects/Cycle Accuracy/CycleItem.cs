@@ -27,9 +27,9 @@ public class CycleItem : MonoBehaviour
 
     public void CreateButtons(int count)
     {
-        for (int i = 1; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
-            CreateButton(i);
+            CreateButton(i * (100 / (count - 1)));
         }
     }
 
@@ -48,7 +48,7 @@ public class CycleItem : MonoBehaviour
         GameObject btn = Instantiate(buttonPrefab);
         btn.transform.SetParent(valueUI, false);
 
-        btn.GetComponentInChildren<TextMeshProUGUI>().text = number.ToString();
+        btn.GetComponentInChildren<TextMeshProUGUI>().text = number.ToString() + "%";;
 
         btn.GetComponent<Button>().onClick.AddListener(() => ToggleValue(number));
         buttons.Add(btn);
@@ -82,7 +82,7 @@ public class CycleItem : MonoBehaviour
     {
         currentValue = value;
         for (int i = 0; i < buttons.Count(); i++) {
-            if (i + 1 == value)
+            if (i * (100 / (buttons.Count() - 1)) == value)
             {
                 buttons[i].GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
             }

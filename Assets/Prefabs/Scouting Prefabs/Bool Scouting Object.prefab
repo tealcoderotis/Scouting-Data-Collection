@@ -215,9 +215,9 @@ MonoBehaviour:
   m_fontSize: 60
   m_fontSizeBase: 80
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 60
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -459,6 +459,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726bffd05b6a75b4eaf3d630951e8ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsButton: {fileID: 0}
+  deleteButton: {fileID: 0}
+  nullifyButton: {fileID: 0}
+  valueLabel: {fileID: 0}
+  nullifiedDefault: 0
   Settings:
     objectIdentifier: 
     objectName: 

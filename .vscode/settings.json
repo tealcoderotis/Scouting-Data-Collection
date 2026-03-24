@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Scouting-Data-Collection.sln"
+    "dotnet.defaultSolution": "Scouting-Data-Collection.slnx"
 }

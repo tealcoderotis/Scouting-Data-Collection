@@ -22,9 +22,9 @@ public class ScoutingScaleObject : ScoutingObject<string, ScoutingScaleObject.Sc
         buttonPrefab = Resources.Load<GameObject>("Prefabs/Button");
         base.Awake();
         valueUI = transform.Find("Value_UI");
-        for (int i = 1; i <= Settings.options; i++)
+        for (int i = 0; i < Settings.options; i++)
         {
-            CreateButton(i);
+            CreateButton(i * (100 / (Settings.options - 1)));
         }
     }
 
@@ -39,7 +39,7 @@ public class ScoutingScaleObject : ScoutingObject<string, ScoutingScaleObject.Sc
         GameObject btn = Instantiate(buttonPrefab);
         btn.transform.SetParent(valueUI, false);
 
-        btn.GetComponentInChildren<TextMeshProUGUI>().text = number.ToString();
+        btn.GetComponentInChildren<TextMeshProUGUI>().text = number.ToString() + "%";
 
         btn.GetComponent<Button>().onClick.AddListener(() => ToggleValue(number));
         buttons.Add(btn);
@@ -73,7 +73,7 @@ public class ScoutingScaleObject : ScoutingObject<string, ScoutingScaleObject.Sc
     {
         currentValue = value;
         for (int i = 0; i < buttons.Count(); i++) {
-            if (i + 1 == value)
+            if (i * (100 / (buttons.Count() - 1)) == value)
             {
                 buttons[i].GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
             }
