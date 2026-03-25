@@ -133,7 +133,7 @@ public class SaveManager
         else sb.Append(File.ReadAllText(competitionPath));
         sb.Append('\n');
         for (int i = 0; i < content.Length; i++)
-            sb.Append($"\"{content[i].value}\"{(i < content.Length - 1 ? ',' : "")}");
+            sb.Append($"\"{content[i].value.Replace("\"", "\"\"")}\"{(i < content.Length - 1 ? ',' : "")}");
         File.WriteAllText(competitionPath, sb.ToString());
     }
 
@@ -154,7 +154,7 @@ public class SaveManager
         else sb.Append(File.ReadAllText(competitionPath));
         sb.Append('\n');
         for (int i = 0; i < content.Length; i++)
-            sb.Append($"\"{content[i].value}\"{(i < content.Length - 1 ? ',' : "")}");
+            sb.Append($"\"{content[i].value.Replace("\"", "\"\"")}\"{(i < content.Length - 1 ? ',' : "")}");
         File.WriteAllText(competitionPath, sb.ToString());
     }
 
@@ -175,7 +175,7 @@ public class SaveManager
         else sb.Append(File.ReadAllText(competitionPath));
         sb.Append('\n');
         for (int i = 0; i < content.Length; i++)
-            sb.Append($"\"{content[i].value}\"{(i < content.Length - 1 ? ',' : "")}");
+            sb.Append($"\"{content[i].value.Replace("\"", "\"\"")}\"{(i < content.Length - 1 ? ',' : "")}");
         File.WriteAllText(competitionPath, sb.ToString());
     }
 
