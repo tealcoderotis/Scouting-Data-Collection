@@ -18,7 +18,7 @@ public class CycleItem : MonoBehaviour
 
     void Awake()
     {
-        buttonPrefab = Resources.Load<GameObject>("Prefabs/Button");
+        buttonPrefab = Resources.Load<GameObject>("Prefabs/Scale Button");
         valueUI = transform.Find("Value_UI");
         deleteButton = transform.Find("Delete Button").gameObject.GetComponent<Button>();
         deleteButton.onClick.AddListener(() => Delete());

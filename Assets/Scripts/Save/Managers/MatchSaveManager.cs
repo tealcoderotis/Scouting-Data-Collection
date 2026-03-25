@@ -25,32 +25,36 @@ public class MatchSaveManager : MonoBehaviour
         {
             for (int scoutingData = 0; scoutingData < scouterContent.GetChild(section).childCount; scoutingData++)
             {
-                ScoutingObject scoutingObject = scouterContent.GetChild(section).GetChild(scoutingData).GetComponent<ScoutingObject>();
-                MatchData.ArbritraryData arbitraryMatchData = scoutingObject.GetMatchData();
-                if (!scoutingObject.Nullified) {
-                    matchData.uniqueData.Add(arbitraryMatchData);
-                    if (scoutingObject.GetCycles() != null)
-                    {
-                        foreach (MatchData cycle in scoutingObject.GetCycles())
-                        {
-                            externalMatchDataInfo.UpdateMatchSaveManagerValues(cycle);
-                            cycleData.Add(cycle);
-                        }
-                    }
-                    if (scoutingObject.GetCycleAccuracy() != null)
-                    {
-                        foreach (MatchData cycle in scoutingObject.GetCycleAccuracy())
-                        {
-                            externalMatchDataInfo.UpdateMatchSaveManagerValues(cycle);
-                            accuracyCycleData.Add(cycle);
-                        }
-                    }
-                }
-                else
+                if (scouterContent.GetChild(section).GetChild(scoutingData).GetComponent<ScoutingObject>() != null)
                 {
-                    matchData.uniqueData.Add(new MatchData.ArbritraryData(arbitraryMatchData.name, arbitraryMatchData.type, ""));
+                    ScoutingObject scoutingObject = scouterContent.GetChild(section).GetChild(scoutingData).GetComponent<ScoutingObject>();
+                    MatchData.ArbritraryData arbitraryMatchData = scoutingObject.GetMatchData();
+                    if (!scoutingObject.Nullified)
+                    {
+                        matchData.uniqueData.Add(arbitraryMatchData);
+                        if (scoutingObject.GetCycles() != null)
+                        {
+                            foreach (MatchData cycle in scoutingObject.GetCycles())
+                            {
+                                externalMatchDataInfo.UpdateMatchSaveManagerValues(cycle);
+                                cycleData.Add(cycle);
+                            }
+                        }
+                        if (scoutingObject.GetCycleAccuracy() != null)
+                        {
+                            foreach (MatchData cycle in scoutingObject.GetCycleAccuracy())
+                            {
+                                externalMatchDataInfo.UpdateMatchSaveManagerValues(cycle);
+                                accuracyCycleData.Add(cycle);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        matchData.uniqueData.Add(new MatchData.ArbritraryData(arbitraryMatchData.name, arbitraryMatchData.type, ""));
+                    }
+                    if (resetValues) scoutingObject.ResetValues();
                 }
-                if (resetValues) scoutingObject.ResetValues();
             }
         }
         SaveManager.SaveMatchData(matchData);

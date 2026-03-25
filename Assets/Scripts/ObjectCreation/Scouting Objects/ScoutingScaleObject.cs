@@ -19,7 +19,7 @@ public class ScoutingScaleObject : ScoutingObject<string, ScoutingScaleObject.Sc
 
     protected override void Awake()
     {
-        buttonPrefab = Resources.Load<GameObject>("Prefabs/Button");
+        buttonPrefab = Resources.Load<GameObject>("Prefabs/Scale Button");
         base.Awake();
         valueUI = transform.Find("Value_UI");
         for (int i = 0; i < Settings.options; i++)
