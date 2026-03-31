@@ -7973,7 +7973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9101593903903371307, guid: 1915295ea5178c442b33e7b3a081e458, type: 3}
       propertyPath: Settings.objectName
-      value: Robot Breakdown (if they break down elaborate in notes, for example,
+      value: Robot Breakdown (if they broke down, elaborate in notes, for example,
         how long they broke down)
       objectReference: {fileID: 0}
     - target: {fileID: 9101593903903371307, guid: 1915295ea5178c442b33e7b3a081e458, type: 3}
@@ -14597,7 +14597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7153958570315008154, guid: d62493d3c399faa4b93d042d8154520f, type: 3}
       propertyPath: Settings.objectName
-      value: Overall Auto Accuracy
+      value: Overall Auto Accuracy (enter 0% if no auto done)
       objectReference: {fileID: 0}
     - target: {fileID: 7153958570315008154, guid: d62493d3c399faa4b93d042d8154520f, type: 3}
       propertyPath: Settings.sectionName
@@ -21431,7 +21431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7153958570315008154, guid: d62493d3c399faa4b93d042d8154520f, type: 3}
       propertyPath: Settings.objectName
-      value: Move and Shoot Accuracy (leave blank if incapable)
+      value: Move and Shoot Accuracy (enter 0% if robot cannot shoot)
       objectReference: {fileID: 0}
     - target: {fileID: 7153958570315008154, guid: d62493d3c399faa4b93d042d8154520f, type: 3}
       propertyPath: Settings.sectionName
@@ -24338,7 +24338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6320246939456426937, guid: 02c344f5bf6b181489904017950c5d51, type: 3}
       propertyPath: Settings.objectName
-      value: Teleop Climb (if they climbed elaborate in notes, for example, what
+      value: Teleop Climb (if they climbed, elaborate in notes, for example, what
         position they climbed at)
       objectReference: {fileID: 0}
     - target: {fileID: 6320246939456426937, guid: 02c344f5bf6b181489904017950c5d51, type: 3}
